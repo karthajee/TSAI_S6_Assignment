@@ -25,4 +25,63 @@ Low learning rates like 0.1 make our model underpowered for the data we have. In
 
 ## Part 2
 
-Solution notebook is stored in the S6 folder
+The solution notebook is present in the S6 folder. Final validation accuracy is 99.43% with a neural network that satisfies the assignment constraint of under 20K parameters. More details can be found in the model summary below:
+
+```
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1            [-1, 8, 28, 28]              72
+              ReLU-2            [-1, 8, 28, 28]               0
+       BatchNorm2d-3            [-1, 8, 28, 28]              16
+           Dropout-4            [-1, 8, 28, 28]               0
+            Conv2d-5            [-1, 8, 28, 28]             576
+              ReLU-6            [-1, 8, 28, 28]               0
+       BatchNorm2d-7            [-1, 8, 28, 28]              16
+           Dropout-8            [-1, 8, 28, 28]               0
+         MaxPool2d-9            [-1, 8, 14, 14]               0
+           Conv2d-10            [-1, 8, 14, 14]              64
+           Conv2d-11           [-1, 14, 14, 14]           1,008
+             ReLU-12           [-1, 14, 14, 14]               0
+      BatchNorm2d-13           [-1, 14, 14, 14]              28
+          Dropout-14           [-1, 14, 14, 14]               0
+           Conv2d-15           [-1, 14, 14, 14]           1,764
+             ReLU-16           [-1, 14, 14, 14]               0
+      BatchNorm2d-17           [-1, 14, 14, 14]              28
+          Dropout-18           [-1, 14, 14, 14]               0
+        MaxPool2d-19             [-1, 14, 7, 7]               0
+           Conv2d-20             [-1, 14, 7, 7]             196
+           Conv2d-21             [-1, 24, 7, 7]           3,024
+             ReLU-22             [-1, 24, 7, 7]               0
+      BatchNorm2d-23             [-1, 24, 7, 7]              48
+          Dropout-24             [-1, 24, 7, 7]               0
+           Conv2d-25             [-1, 24, 7, 7]           5,184
+             ReLU-26             [-1, 24, 7, 7]               0
+      BatchNorm2d-27             [-1, 24, 7, 7]              48
+          Dropout-28             [-1, 24, 7, 7]               0
+        MaxPool2d-29             [-1, 24, 3, 3]               0
+           Conv2d-30             [-1, 24, 3, 3]             576
+           Conv2d-31             [-1, 32, 3, 3]           6,912
+             ReLU-32             [-1, 32, 3, 3]               0
+      BatchNorm2d-33             [-1, 32, 3, 3]              64
+          Dropout-34             [-1, 32, 3, 3]               0
+           Conv2d-35             [-1, 10, 3, 3]             320
+        AvgPool2d-36             [-1, 10, 1, 1]               0
+================================================================
+Total params: 19,944
+Trainable params: 19,944
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.67
+Params size (MB): 0.08
+Estimated Total Size (MB): 0.75
+----------------------------------------------------------------
+```
+Used the following intuitions to build the network:
+- Upon visually inspecting a few images, 5x5 pixels were enough for my eye to detect edges etc. As such, used 2 convolution layers in the first block followed by transition blocks. Similar assessment for substructures of numbers (for e.g. the arc of a 2 etc)
+- Batch Norm and Dropout (with low percentage as the network has very few params) added after every feature extracting layer, save for the last output layer
+- Used a pyramidal architecture scheme instead of squeeze and expand
+  - Note: I used 14 as the channel size in the second block (instead of the more optimized 16) in order to make model parameters under 20K
+- Leveraged transition blocks made up of Max Pooling and 1x1 convolution layers
+- **Clarification:** I answered "True" to whether I used a Fully Connected Layer. Reason: 1x1 convolution layer used at the end is a superset of the Fully Connected Layer and is functionally very similar to a Fully Connected Layer
