@@ -18,11 +18,6 @@
   1.  Partial derivatives of E_tot is calculated wrt all parameters of the model
   2.  Chain rule is leveraged to calculate partial derivatives of E_tot wrt weights far away from it in the DAG (e.g. w1)
   3.  Sigmoid is differtiable for all values of x. Its derivative is used wherever activation is involved
-
-### Learning Rate affects how loss evolves
-
-![](loss_for_different_learning rates.png)
-
-- The graph above shows how loss evolves with epochs for different learning rates
 - Low learning rates like 0.1 make our model underpowered for the data we have. In contrast, high learning rates make the network learn faster
   - Note: This should be confirmed with a separate test set. Training loss reaching low values in fewer epochs with high learning rates like 2.0 do not matter if test set loss is high
+  - Visual comparison can be found in 'loss_for_different_learning rates.png'
