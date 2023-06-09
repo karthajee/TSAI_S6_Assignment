@@ -84,4 +84,5 @@ Used the following intuitions to build the network:
 - Used a pyramidal architecture scheme instead of squeeze and expand
   - Note: I used 14 as the channel size in the second block (instead of the more optimized 16) in order to make model parameters under 20K
 - Leveraged transition blocks made up of Max Pooling and 1x1 convolution layers
+- Used a Learning Rate scheduler with an initial lr of 0.1 to drop by 10% every 10 epochs. Without the scheduler, I noticed a minima was missed (i.e., test set accuracy went up till 98% after 9-10 epochs and started dropping and then rose again but then, 20 epochs were up) 
 - **Clarification:** I answered "True" to whether I used a Fully Connected Layer. Reason: 1x1 convolution layer used at the end is a superset of the Fully Connected Layer and is functionally very similar to a Fully Connected Layer
