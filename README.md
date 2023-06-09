@@ -21,7 +21,7 @@
 
 ### Learning Rate affects how loss evolves
 
-![](Rate of change of loss for different learning rates.png)
+![](loss_for_different_learning rates.png)
 
 - The graph above shows how loss evolves with epochs for different learning rates
 - Low learning rates like 0.1 make our model underpowered for the data we have. In contrast, high learning rates make the network learn faster
