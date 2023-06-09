@@ -22,3 +22,7 @@
 3.  Sigmoid is differtiable for all values of x. Its derivative is used wherever activation is involved
 
 Low learning rates like 0.1 make our model underpowered for the data we have. In contrast, high learning rates make the network learn faster. This should be obviously confirmed with a separate test set. Training loss reaching low values in fewer epochs with high learning rates like 2.0 do not matter if test set loss is high. A visual comparison can be found in 'loss_for_different_learning rates.png'
+
+## Part 2
+
+Solution notebook is stored in the S6 folder
